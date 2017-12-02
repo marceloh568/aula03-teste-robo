@@ -1,9 +1,17 @@
 package br.com.teste.robo;
 
+import java.io.IOException;
+
 public class Robo {
 
 	private int limiteEixoDasOrdenadasY, limiteEixoDasAbcissasX;
 	private int posicaoPlanoCartesianoX, posicaoPlanoCartesianoY;
+	
+	private final String DIREITA = "Direita";
+	private final String ESQUERDA = "Esquerda";
+	private final String CIMA = "Cima";
+	private final String BAIXO = "Baixo";
+	//private String textoDoLog = "";
 
 	public Robo(int limiteEixoDasOrdenadasY, int limiteEixoDasAbcissasX,
 			int posicaoPlanoCartesianoX, int posicaoPlanoCartesianoY) {
@@ -12,20 +20,34 @@ public class Robo {
 		this.posicaoPlanoCartesianoX = posicaoPlanoCartesianoX;
 		this.posicaoPlanoCartesianoY = posicaoPlanoCartesianoY;
 	}
+	
+	
+
+	public Robo() {
+		super();
+	}
+
+
 
 	//DIREITA
 	// --------------------------------------------------------------------------------
-	public void moverXParaDireita() {
+	public void moverXParaDireita(int qtdPassos) {
 
-		if (ehPossivelMoverParaDireitaX()) {
-			this.posicaoPlanoCartesianoX = posicaoPlanoCartesianoX + 1;
+		if (ehPossivelMoverParaDireitaX(qtdPassos)) {
+			this.posicaoPlanoCartesianoX = posicaoPlanoCartesianoX + qtdPassos;
+			try {
+				GeradorDeLog.gravarLog(qtdPassos, DIREITA);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			throw new RuntimeException("NÃO É POSSÍVEL MOVER PARA A DIREITA!");
 		}
 	}
 
-	public boolean ehPossivelMoverParaDireitaX() {
-		if (this.posicaoPlanoCartesianoX + 1 <= limiteEixoDasAbcissasX) {
+	public boolean ehPossivelMoverParaDireitaX(int qtdPassos) {
+		if (this.posicaoPlanoCartesianoX + qtdPassos <= limiteEixoDasAbcissasX) {
 			return true;
 		}
 		return false;
@@ -33,17 +55,23 @@ public class Robo {
 
 	//ESQUERDA
 	// -------------------------------------------------------------------------------
-	public void moverXParaEsquerda() {
+	public void moverXParaEsquerda(int qtdPassos) {
 
-		if (ehPossivelMoverParaEsquerdaX()) {
-			this.posicaoPlanoCartesianoX = posicaoPlanoCartesianoX - 1;
+		if (ehPossivelMoverParaEsquerdaX(qtdPassos)) {
+			this.posicaoPlanoCartesianoX = posicaoPlanoCartesianoX - qtdPassos;
+			try {
+				GeradorDeLog.gravarLog(qtdPassos, ESQUERDA);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			throw new RuntimeException("NÃO É POSSÍVEL MOVER PARA A ESQUERDA!");
 		}
 	}
 
-	public boolean ehPossivelMoverParaEsquerdaX() {
-		if (this.posicaoPlanoCartesianoX - 1 >= 0) {
+	public boolean ehPossivelMoverParaEsquerdaX(int qtdPassos) {
+		if (this.posicaoPlanoCartesianoX - qtdPassos >= 0) {
 			return true;
 		}
 		return false;
@@ -51,16 +79,22 @@ public class Robo {
 
 	//CIMA
 	// --------------------------------------------------------------------------------
-	public void moverYParaCima() {
-		if (ehPossivelMoverParaCimaY()) {
-			this.posicaoPlanoCartesianoY = posicaoPlanoCartesianoY + 1;
+	public void moverYParaCima(int qtdPassos) {
+		if (ehPossivelMoverParaCimaY(qtdPassos)) {
+			this.posicaoPlanoCartesianoY = posicaoPlanoCartesianoY + qtdPassos;
+			try {
+				GeradorDeLog.gravarLog(qtdPassos, CIMA);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			throw new RuntimeException("NÃO É POSSÍVEL MOVER PARA CIMA!");
 		}
 	}
 
-	public boolean ehPossivelMoverParaCimaY() {
-		if (this.posicaoPlanoCartesianoY + 1 <= limiteEixoDasOrdenadasY) {
+	public boolean ehPossivelMoverParaCimaY(int qtdPassos) {
+		if (this.posicaoPlanoCartesianoY + qtdPassos <= limiteEixoDasOrdenadasY) {
 			return true;
 		}
 		return false;
@@ -68,17 +102,23 @@ public class Robo {
 	
 	//BAIXO
 	//---------------------------------------------------------------------------------
-	public void moverYParaBaixo() {
+	public void moverYParaBaixo(int qtdPassos) {
 
-		if (ehPossivelMoverParaBaixoY()) {
-			this.posicaoPlanoCartesianoY = posicaoPlanoCartesianoY - 1;
+		if (ehPossivelMoverParaBaixoY(qtdPassos)) {
+			this.posicaoPlanoCartesianoY = posicaoPlanoCartesianoY - qtdPassos;
+			try {
+				GeradorDeLog.gravarLog(qtdPassos, BAIXO);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			throw new RuntimeException("NÃO É POSSÍVEL MOVER PARA BAIXO!");
 		}
 	}
 
-	public boolean ehPossivelMoverParaBaixoY() {
-		if (this.posicaoPlanoCartesianoY - 1 >= 0) {
+	public boolean ehPossivelMoverParaBaixoY(int qtdPassos) {
+		if (this.posicaoPlanoCartesianoY - qtdPassos >= 0) {
 			return true;
 		}
 		return false;
@@ -118,6 +158,4 @@ public class Robo {
 	public void setPosicaoPlanoCartesianoY(int posicaoPlanoCartesianoY) {
 		this.posicaoPlanoCartesianoY = posicaoPlanoCartesianoY;
 	}
-	
-	
 }
